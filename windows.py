@@ -25,7 +25,7 @@ What Do you want to download ?"
     if command == "1":
         link = input("Enter Your Video Link : ")
         print("""Please select video quality.
-[1] 144p
+[1] 360p
 [2] 720p
 """)
         video_quality = int(input("> "))
@@ -45,6 +45,7 @@ What Do you want to download ?"
         link = input("Enter Your Video Link : ")
         download_command = f"yt-dlp {link} "
         subprocess.run(download_command, shell=True, check=True)
+        subprocess.run("cls", shell=True, check=True)
 
     else:
         print("Invaild Input!.")
