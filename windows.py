@@ -1,4 +1,5 @@
 import subprocess
+import os
 
 logo = """██╗   ██╗██╗██████╗ ███████╗ ██████╗     ██████╗  ██████╗ ██╗    ██╗███╗   ██╗██╗      ██████╗  █████╗ ██████╗ ███████╗██████╗ 
 ██║   ██║██║██╔══██╗██╔════╝██╔═══██╗    ██╔══██╗██╔═══██╗██║    ██║████╗  ██║██║     ██╔═══██╗██╔══██╗██╔══██╗██╔════╝██╔══██╗
@@ -17,15 +18,17 @@ command = "on"
 while not command == "off":
     print(logo)
     print("""Welcome to video downloader.
-[1] Youtube Video.
-[2] Other Video.
+[1] Youtube Video(HD/SD).
+[2] Tiktok Video (No Watermark).
+[3] Zoom Recording Download.
+[4] Other Video(HD).
 What Do you want to download ?"
 """)
     command = input("> ")
     if command == "1":
         link = input("Enter Your Video Link : ")
         print("""Please select video quality.
-[1] 360p
+[1] 144p
 [2] 720p
 """)
         video_quality = int(input("> "))
@@ -45,7 +48,23 @@ What Do you want to download ?"
         link = input("Enter Your Video Link : ")
         download_command = f"yt-dlp {link} "
         subprocess.run(download_command, shell=True, check=True)
-        subprocess.run("cls", shell=True, check=True)
+
+    elif command == "3":
+        link = input("Enter Your Video Link : ")
+        password_protected = input("Password Protected ? [y/n]: ")
+        if password_protected == "y":
+            video_passcode = input("Enter the video password : ")
+            download_command = f"yt-dlp {link} --video-password {video_passcode}"
+        else:
+            download_command = f"yt-dlp {link} "
+
+        print(download_command)
+        subprocess.run(download_command, shell=True, check=True)
+
+    elif command == "4":
+        link = input("Enter Your Video Link : ")
+        download_command = f"yt-dlp {link} "
+        subprocess.run(download_command, shell=True, check=True)
 
     else:
         print("Invaild Input!.")
